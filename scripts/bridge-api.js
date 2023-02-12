@@ -1,11 +1,11 @@
 const Web3 = require("web3");
 
-const BridgeEth = require("../build/contracts/BridgeEth.sol");
-const BridgePolygon = require("../build/contracts/BridgePolygon.sol");
-const BridgeOptimism = require("../build/contracts/BridgeOptimism.sol");
-const BridgeArbitrum = require("../build/contracts/BridgeArbitrum.sol");
-const BridgeAvalanche = require("../build/contracts/BridgeAvalanche.sol");
-const BridgeBsc = require("../build/contracts/BridgeBsc.sol");
+const BridgeEth = require("../build/contracts/BridgeEth");
+const BridgePolygon = require("../build/contracts/BridgePolygon");
+const BridgeOptimism = require("../build/contracts/BridgeOptimism");
+const BridgeArbitrum = require("../build/contracts/BridgeArbitrum");
+const BridgeAvalanche = require("../build/contracts/BridgeAvalanche");
+const BridgeBsc = require("../build/contracts/BridgeBsc");
 
 // Instantiating web3 objects with chains
 const web3Eth = new Web3(
@@ -55,7 +55,7 @@ const bridgeAvalanche = new web3Avalanche.eth.Contract(
 
 // The private key of the wallet to be used as the admin address
 const adminPrivKey =
-  "20f59edb6af6f23b164d83f03175455b72a9d9fc514006a48cbea92c49101a8d";
+  "5cba9caf051ee2e460bb9ce372cdb51fc6b8782d88dad729cb7baf63d99d95b2";
 
 // Deriving the public address of the wallet using the private key
 const { address: admin } = web3Bsc.eth.accounts.wallet.add(adminPrivKey);

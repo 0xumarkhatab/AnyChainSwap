@@ -41,7 +41,7 @@ module.exports = async function (deployer, network, addresses) {
 
   async function NetworkContentDeployer(token, bridge) {
     await deployer.deploy(token);
-    const token_ = await TokenAvalanche.deployed();
+    const token_ = await token.deployed();
     await deployer.deploy(bridge, token_.address);
     const bridge_ = await bridge.deployed();
     console.log("Minting tokens for bridge contract");

@@ -7776,36 +7776,19 @@
   "ast": {
     "absolutePath": "project:/contracts/TokenOptimism.sol",
     "exportedSymbols": {
-      "Context": [
-        711
-      ],
-      "ERC20": [
-        586
-      ],
-      "IERC20": [
-        664
-      ],
-      "IERC20Metadata": [
-        689
-      ],
-      "TokenBase": [
-        1182
-      ],
-      "TokenOptimism": [
-        1224
-      ]
+      "Context": [711],
+      "ERC20": [586],
+      "IERC20": [664],
+      "IERC20Metadata": [689],
+      "TokenBase": [1182],
+      "TokenOptimism": [1224]
     },
     "id": 1225,
     "nodeType": "SourceUnit",
     "nodes": [
       {
         "id": 1212,
-        "literals": [
-          "solidity",
-          "^",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "0:23:17"
       },
@@ -7842,14 +7825,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 1224,
-        "linearizedBaseContracts": [
-          1224,
-          1182,
-          586,
-          689,
-          664,
-          711
-        ],
+        "linearizedBaseContracts": [1224, 1182, 586, 689, 664, 711],
         "name": "TokenOptimism",
         "nameLocation": "61:13:17",
         "nodeType": "ContractDefinition",
@@ -7948,7 +7924,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-02-12T09:07:22.299Z",
+  "updatedAt": "2023-02-12T09:00:34.103Z",
   "devdoc": {
     "kind": "dev",
     "methods": {
