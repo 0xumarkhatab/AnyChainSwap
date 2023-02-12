@@ -1,21 +1,52 @@
+// Tokens import
 const TokenEth = artifacts.require("TokenEth.sol");
 const TokenBsc = artifacts.require("TokenBsc.sol");
+const TokenOptimism = artifacts.require("TokenOptimism.sol");
+const TokenArbitrum = artifacts.require("TokenArbitrum.sol");
+const TokenPolygon = artifacts.require("TokenPolygon.sol");
+const TokenAvalanche = artifacts.require("TokenAvalanche.sol");
+// Bridges import
+
 const BridgeEth = artifacts.require("BridgeEth.sol");
+const BridgePolygon = artifacts.require("BridgePolygon.sol");
+const BridgeOptimism = artifacts.require("BridgeOptimism.sol");
+const BridgeArbitrum = artifacts.require("BridgeArbitrum.sol");
+const BridgeAvalanche = artifacts.require("BridgeAvalanche.sol");
 const BridgeBsc = artifacts.require("BridgeBsc.sol");
 
 module.exports = async function (deployer, network, addresses) {
-  if (network === "ethereum_testnet") {
-    await deployer.deploy(TokenEth);
-    const tokenEth = await TokenEth.deployed();
-    // console.log("addresses are ", addresses);
-    await tokenEth.mint(addresses[0], 1000);
-    await deployer.deploy(BridgeEth, tokenEth.address);
-    const bridgeEth = await BridgeEth.deployed();
+  switch (network) {
+    case "ethereum_testnet":
+      await NetworkContentDeployer(TokenEth, BridgeEth);
+      break;
+    case "bsc_testnet":
+      await NetworkContentDeployer(TokenBsc, BridgeBsc);
+      break;
+    case "polygon_testnet":
+      await NetworkContentDeployer(TokenPolygon, BridgePolygon);
+      break;
+    case "arbitrum_testnet":
+      await NetworkContentDeployer(TokenArbitrum, BridgeArbitrum);
+      break;
+    case "optimism_testnet":
+      await NetworkContentDeployer(TokenOptimism, BridgeOptimism);
+      break;
+    case "avalanche_testnet":
+      await NetworkContentDeployer(TokenAvalanche, BridgeAvalanche);
+      break;
+
+    default:
+      console.log("Invalid chain Network");
   }
-  if (network === "bsc_testnet") {
-    await deployer.deploy(TokenBsc);
-    const tokenBsc = await TokenBsc.deployed();
-    await deployer.deploy(BridgeBsc, tokenBsc.address);
-    const bridgeBsc = await BridgeBsc.deployed();
+
+  async function NetworkContentDeployer(token, bridge) {
+    await deployer.deploy(token);
+    const token_ = await TokenAvalanche.deployed();
+    await deployer.deploy(bridge, token_.address);
+    const bridge_ = await bridge.deployed();
+    console.log("Minting tokens for bridge contract");
+    await token_.mint(bridge_.address, 1000);
+    console.log("Minting tokens for User ", addresses[0]);
+    await token_.mint(addresses[0], 1000);
   }
 };

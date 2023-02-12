@@ -14,20 +14,26 @@ contract SwapBridgeBase {
         address user,
         uint amount,
         uint nonce,
-        bytes signature
+        bytes signature,
+        bytes sourceChain,
+        bytes destinationChain
     );
     event WithdrawSuccess(
         address user,
         uint amount,
         uint nonce,
-        bytes signature
+        bytes signature,
+        bytes sourceChain,
+        bytes destinationChain
     );
 
     function swap(
         address user,
         uint amount,
         uint nonce,
-        bytes memory signature
+        bytes memory signature,
+        bytes memory sourceChain,
+        bytes memory destinationChain
     ) public {
         bytes32 message = prefixed(
             keccak256(abi.encodePacked(user, amount, nonce))
@@ -44,14 +50,23 @@ contract SwapBridgeBase {
         // take tokens in from user
         token.transferFrom(user, address(this), amount);
 
-        emit DepositSuccess(user, amount, nonce, signature);
+        emit DepositSuccess(
+            user,
+            amount,
+            nonce,
+            signature,
+            sourceChain,
+            destinationChain
+        );
     }
 
     function withdraw(
         address user,
         uint amount,
         uint nonce,
-        bytes memory signature
+        bytes memory signature,
+        bytes memory sourceChain,
+        bytes memory destinationChain
     ) public {
         // if the signature is valid
         bytes32 message = prefixed(
@@ -68,7 +83,14 @@ contract SwapBridgeBase {
         token.transferFrom(address(this), user, amount);
         processedUserSignatures[user][signature] = true;
 
-        emit WithdrawSuccess(user, amount, nonce, signature);
+        emit WithdrawSuccess(
+            user,
+            amount,
+            nonce,
+            signature,
+            sourceChain,
+            destinationChain
+        );
     }
 
     /** Signature Verification Utilities */

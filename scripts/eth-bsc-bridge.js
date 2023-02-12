@@ -2,13 +2,24 @@ const Web3 = require("web3");
 const BridgeEth = require("../build/contracts/BridgeEth.json");
 const BridgeBsc = require("../build/contracts/BridgeBsc.json");
 
-// Instantiating web3 object with the Ethereum network's WebSocket URL
+// Instantiating web3 objects with chains
+
 const web3Eth = new Web3(
   "wss://goerli.infura.io/ws/v3/0e88431708fb4d219a28755bf50fb061"
 );
-
-// Instantiating web3 object with the Binance Smart Chain network's RPC URL
+const web3Polygon = new Web3(
+  "https://polygon-mumbai.infura.io/v3/0e88431708fb4d219a28755bf50fb061"
+);
 const web3Bsc = new Web3("https://data-seed-prebsc-1-s3.binance.org:8545");
+const web3Optimism = new Web3(
+  "https://optimism-goerli.infura.io/v3/0e88431708fb4d219a28755bf50fb061"
+);
+const web3Arbitrum = new Web3(
+  "https://arbitrum-goerli.infura.io/v3/0e88431708fb4d219a28755bf50fb061"
+);
+const web3Avalanche = new Web3(
+  "https://avalanche-fuji.infura.io/v3/0e88431708fb4d219a28755bf50fb061"
+);
 
 // The private key of the wallet to be used as the admin address
 const adminPrivKey =
@@ -16,6 +27,45 @@ const adminPrivKey =
 
 // Deriving the public address of the wallet using the private key
 const { address: admin } = web3Bsc.eth.accounts.wallet.add(adminPrivKey);
+
+async function performDestinationSwap(
+  user,
+  amount,
+  nonce,
+  signature,
+  sourceChain,
+  destinationChain
+) {
+  switch (destinationChain) {
+    case "ethereum":
+      console.log("Withdrawing on Ethereum Bridge...");
+
+      break;
+    case "bsc":
+      console.log("Withdrawing on Bsc Bridge...");
+
+      break;
+    case "polygon":
+      console.log("Withdrawing on Polygon Bridge...");
+
+      break;
+    case "arbitrum":
+      console.log("Withdrawing on Arbitrum Bridge...");
+
+      break;
+    case "optimism":
+      console.log("Withdrawing on Optimism Bridge...");
+
+      break;
+    case "avalanche":
+      console.log("Withdrawing on Avalanche Bridge...");
+
+      break;
+
+    default:
+      console.log("Invalid Chain");
+  }
+}
 
 // Instantiating the BridgeEth contract with its ABI and address
 const bridgeEth = new web3Eth.eth.Contract(
@@ -35,7 +85,8 @@ console.log("Listening to the events....");
 //
 
 bridgeEth.events.DepositSuccess({ fromBlock: 0 }).on("data", async (event) => {
-  const { user, amount, nonce, signature } = event.returnValues;
+  const { user, amount, nonce, signature, sourceChain, destinationChain } =
+    event.returnValues;
   console.log(`
     ETH Deposit Success:
     - ${user} Depoisted ${amount} tokens
