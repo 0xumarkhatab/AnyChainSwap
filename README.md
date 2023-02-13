@@ -49,9 +49,14 @@ The output will be like as follows
 
 Check the Token Balances again by running following Commands
 
-ETH Token Balance of the User : `truffle exec scripts/eth-token-balance.js --network ethereum_testnet `
+ETH Token Balance of the User : `truffle exec scripts/balance.js --network ethereum_testnet ethereum`
+BSC Token Balance of the User : `truffle exec scripts/balance.js --network bsc_testnet bsc`
+Arbitrum Token Balance of the User : `truffle exec scripts/balance.js --network arbitrum_testnet arbitrum`
 
-BSC Token Balance of the User : `truffle exec scripts/bsc-token-balance.js --network bsc_testnet `
+same goes for optimism ,polygon and avalanche.
+
+![crossChainBalances](https://user-images.githubusercontent.com/71306738/218308135-3a9d6abb-ee46-483e-b1d0-9715289a7315.PNG)
+
 
 ## Run API for listening token Transfer Events
 
