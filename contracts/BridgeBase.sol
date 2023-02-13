@@ -42,6 +42,8 @@ contract SwapBridgeBase {
             recoverSigner(message, signature) == user,
             "Signature Error: Not Signed by the Proposer"
         );
+        // 0x7ec4d3fb081bd6db1102f7cfd085984fb7ab4e8e04de61f2b94dcd7858778d14159aed4255970932617ad4ffd1e75d301764162bca181b8cdec183db9f1a446e1c
+        // 0x7ec4d3fb081bd6db1102f7cfd085984fb7ab4e8e04de61f2b94dcd7858778d14159aed4255970932617ad4ffd1e75d301764162bca181b8cdec183db9f1a446e1c
 
         require(
             token.allowance(msg.sender, address(this)) >= amount,
@@ -49,6 +51,7 @@ contract SwapBridgeBase {
         );
         // take tokens in from user
         token.transferFrom(user, address(this), amount);
+        processedUserSignatures[user][signature] = false;
 
         emit DepositSuccess(
             user,
@@ -93,6 +96,13 @@ contract SwapBridgeBase {
         );
     }
 
+    function isTransactionProcessed(
+        address user,
+        bytes memory signature
+    ) public returns (bool) {
+        return processedUserSignatures[user][signature];
+    }
+
     /** Signature Verification Utilities */
 
     function prefixed(bytes32 hash) internal pure returns (bytes32) {
@@ -118,8 +128,6 @@ contract SwapBridgeBase {
     function splitSignature(
         bytes memory sig
     ) internal pure returns (uint8, bytes32, bytes32) {
-        require(sig.length == 65);
-
         bytes32 r;
         bytes32 s;
         uint8 v;

@@ -43,7 +43,7 @@ module.exports = async (done) => {
   }
   console.log("Source is " + source + " Destination " + destination);
 
-  const nonce = 2; //Need to increment this for each new transfer
+  const nonce = 3; //Need to increment this for each new transfer
   let NetworkBridge = getNetworkBridge(source);
   if (!NetworkBridge) return 0;
 

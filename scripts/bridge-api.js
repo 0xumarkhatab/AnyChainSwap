@@ -17,7 +17,7 @@ const bscProviderUrl = "https://data-seed-prebsc-1-s3.binance.org:8545";
 const optimismProviderUrl =
   "https://optimism-goerli.infura.io/v3/0e88431708fb4d219a28755bf50fb061";
 const arbitrumProviderUrl =
-  "https://arbitrum-goerli.infura.io/v3/0e88431708fb4d219a28755bf50fb061";
+  "https://arbitrum-goerli.infura.io/v3/e3562069a1d44d18aa58a3ea55ccf21a";
 const avalancheProviderUrl =
   "https://avalanche-fuji.infura.io/v3/0e88431708fb4d219a28755bf50fb061";
 
@@ -86,6 +86,13 @@ async function executeTransaction(
 ) {
   // initiate withdraw transaction
   // Destructuring the values from the event
+  let isProcessed = await bridgeObject.methods
+    .isTransactionProcessed(user, signature)
+    .call();
+  if (isProcessed) {
+    console.log("Transaction has already been processed");
+    return 0;
+  }
   const tx = bridgeObject.methods.withdraw(
     user,
     amount,
@@ -114,9 +121,14 @@ async function executeTransaction(
   };
 
   // Sending the transaction to the Binance Smart Chain
-  const receipt = await web3Object.eth.sendTransaction(txData);
-  // Logging the transaction hash
-  console.log(`Transaction hash: ${receipt.transactionHash}`);
+  try {
+    web3Object.eth.sendTransaction(txData).then((receipt) => {
+      console.log(`Transaction hash: ${receipt.transactionHash}`);
+    });
+    // Logging the transaction hash
+  } catch (e) {
+    console.log(`Transaction Failed : ${e}`);
+  }
 }
 
 async function performDestinationSwap(
@@ -228,6 +240,7 @@ bridgeEth.events.DepositSuccess({ fromBlock: 0 }).on("data", async (event) => {
   console.log(`
     ETH Deposit Success:
     - ${user} Depoisted ${amount} tokens
+    - Destination chain is ${destinationChain}
     - Signature ${signature}
   `);
 
@@ -246,6 +259,7 @@ bridgeBsc.events.DepositSuccess({ fromBlock: 0 }).on("data", async (event) => {
   console.log(`
     BSC Deposit Success:
     - ${user} Depoisted ${amount} tokens
+    - Destination chain is ${destinationChain}
     - Signature ${signature}
   `);
 
@@ -266,6 +280,7 @@ bridgePolygon.events
     console.log(`
     Polygon Deposit Success:
     - ${user} Depoisted ${amount} tokens
+    - Destination chain is ${destinationChain}
     - Signature ${signature}
   `);
 
@@ -278,14 +293,18 @@ bridgePolygon.events
       destinationChain
     );
   });
+
+//
 bridgeArbitrum.events
   .DepositSuccess({ fromBlock: 0 })
   .on("data", async (event) => {
+    console.log("arbitrum fired");
     const { user, amount, nonce, signature, sourceChain, destinationChain } =
       event.returnValues;
     console.log(`
     Arbitrum Deposit Success:
     - ${user} Depoisted ${amount} tokens
+    - Destination chain is ${destinationChain}
     - Signature ${signature}
   `);
 
@@ -298,6 +317,7 @@ bridgeArbitrum.events
       destinationChain
     );
   });
+
 bridgeOptimism.events
   .DepositSuccess({ fromBlock: 0 })
   .on("data", async (event) => {
@@ -306,6 +326,7 @@ bridgeOptimism.events
     console.log(`
     Optimism Deposit Success:
     - ${user} Depoisted ${amount} tokens
+    - Destination chain is ${destinationChain}
     - Signature ${signature}
   `);
 
@@ -326,6 +347,7 @@ bridgeAvalanche.events
     console.log(`
     Avalanche Deposit Success:
     - ${user} Depoisted ${amount} tokens
+    - Destination chain is ${destinationChain}
     - Signature ${signature}
   `);
 
@@ -344,6 +366,7 @@ bridgeEth.events.WithdrawSuccess({ fromBlock: 0 }).on("data", async (event) => {
   console.log(`
     ETH Withdraw Success:
     - User ${user} Withdrawn ${amount} tokens
+    - Destination chain is ${destinationChain}
     - Signature ${signature}
   `);
 });

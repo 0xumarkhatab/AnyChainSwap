@@ -41,7 +41,7 @@ module.exports = {
       provider: () =>
         new HDWalletProvider(
           mnemonic,
-          `https://arbitrum-goerli.infura.io/v3/0e88431708fb4d219a28755bf50fb061`
+          `https://arbitrum-goerli.infura.io/v3/e3562069a1d44d18aa58a3ea55ccf21a`
         ),
       skipDryRun: true,
       network_id: 421613, // Binance Snart Chain testnet's id
