@@ -5,7 +5,7 @@ const TokenArbitrum = artifacts.require("TokenArbitrum.sol");
 const TokenPolygon = artifacts.require("TokenPolygon.sol");
 const TokenAvalanche = artifacts.require("TokenAvalanche.sol");
 
-function getNetworkToken(chainName) {
+export function getNetworkToken(chainName) {
   let chain = chainName.toLowerCase();
   switch (chain) {
     case "ethereum":

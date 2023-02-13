@@ -6,56 +6,60 @@ const BridgeOptimism = require("../build/contracts/BridgeOptimism");
 const BridgeArbitrum = require("../build/contracts/BridgeArbitrum");
 const BridgeAvalanche = require("../build/contracts/BridgeAvalanche");
 const BridgeBsc = require("../build/contracts/BridgeBsc");
+const {
+  ethProviderUrl,
+  polygonProviderUrl,
+  bscProviderUrl,
+  optimismProviderUrl,
+  arbitrumProviderUrl,
+  avalancheProviderUrl,
+  avalancheChainId,
+  arbitrumChainId,
+  optimismChainId,
+  polygonChainId,
+  bscChainId,
+  ethChainId,
+} = require("./providerUrls");
+const adminPrivKey =
+  "5cba9caf051ee2e460bb9ce372cdb51fc6b8782d88dad729cb7baf63d99d95b2";
 
 // Instantiating web3 objects with chains
-const web3Eth = new Web3(
-  "wss://goerli.infura.io/ws/v3/0e88431708fb4d219a28755bf50fb061"
-);
-const web3Polygon = new Web3(
-  "https://polygon-mumbai.infura.io/v3/0e88431708fb4d219a28755bf50fb061"
-);
-const web3Bsc = new Web3("https://data-seed-prebsc-1-s3.binance.org:8545");
-const web3Optimism = new Web3(
-  "https://optimism-goerli.infura.io/v3/0e88431708fb4d219a28755bf50fb061"
-);
-const web3Arbitrum = new Web3(
-  "https://arbitrum-goerli.infura.io/v3/0e88431708fb4d219a28755bf50fb061"
-);
-const web3Avalanche = new Web3(
-  "https://avalanche-fuji.infura.io/v3/0e88431708fb4d219a28755bf50fb061"
-);
+const web3Eth = new Web3(ethProviderUrl);
+const web3Polygon = new Web3(polygonProviderUrl);
+const web3Bsc = new Web3(bscProviderUrl);
+const web3Optimism = new Web3(optimismProviderUrl);
+const web3Arbitrum = new Web3(arbitrumProviderUrl);
+const web3Avalanche = new Web3(avalancheProviderUrl);
 
 // Instantiating the Contracts to interact with
 
 const bridgeEth = new web3Eth.eth.Contract(
   BridgeEth.abi,
-  BridgeEth.networks["5"].address
+  BridgeEth.networks[ethChainId].address
 );
 
 const bridgeBsc = new web3Bsc.eth.Contract(
   BridgeBsc.abi,
-  BridgeBsc.networks["97"].address
+  BridgeBsc.networks[bscChainId].address
 );
 const bridgePolygon = new web3Polygon.eth.Contract(
   BridgePolygon.abi,
-  BridgePolygon.networks["80001"].address
+  BridgePolygon.networks[polygonChainId].address
 );
 const bridgeOptimism = new web3Optimism.eth.Contract(
   BridgeOptimism.abi,
-  BridgeOptimism.networks["420"].address
+  BridgeOptimism.networks[optimismChainId].address
 );
 const bridgeArbitrum = new web3Arbitrum.eth.Contract(
   BridgeArbitrum.abi,
-  BridgeArbitrum.networks["421613"].address
+  BridgeArbitrum.networks[arbitrumChainId].address
 );
 const bridgeAvalanche = new web3Avalanche.eth.Contract(
   BridgeAvalanche.abi,
-  BridgeAvalanche.networks["43113"].address
+  BridgeAvalanche.networks[avalancheChainId].address
 );
 
 // The private key of the wallet to be used as the admin address
-const adminPrivKey =
-  "5cba9caf051ee2e460bb9ce372cdb51fc6b8782d88dad729cb7baf63d99d95b2";
 
 // Deriving the public address of the wallet using the private key
 const { address: admin } = web3Bsc.eth.accounts.wallet.add(adminPrivKey);

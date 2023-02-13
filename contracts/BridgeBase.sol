@@ -15,16 +15,16 @@ contract SwapBridgeBase {
         uint amount,
         uint nonce,
         bytes signature,
-        bytes sourceChain,
-        bytes destinationChain
+        string sourceChain,
+        string destinationChain
     );
     event WithdrawSuccess(
         address user,
         uint amount,
         uint nonce,
         bytes signature,
-        bytes sourceChain,
-        bytes destinationChain
+        string sourceChain,
+        string destinationChain
     );
 
     function swap(
@@ -32,8 +32,8 @@ contract SwapBridgeBase {
         uint amount,
         uint nonce,
         bytes memory signature,
-        bytes memory sourceChain,
-        bytes memory destinationChain
+        string memory sourceChain,
+        string memory destinationChain
     ) public {
         bytes32 message = prefixed(
             keccak256(abi.encodePacked(user, amount, nonce))
@@ -65,8 +65,8 @@ contract SwapBridgeBase {
         uint amount,
         uint nonce,
         bytes memory signature,
-        bytes memory sourceChain,
-        bytes memory destinationChain
+        string memory sourceChain,
+        string memory destinationChain
     ) public {
         // if the signature is valid
         bytes32 message = prefixed(

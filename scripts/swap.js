@@ -59,6 +59,7 @@ module.exports = async (done) => {
     .toString("hex");
   const { signature } = web3.eth.accounts.sign(message, privKey);
   console.log({ signature });
+  console.log("starting swap ...");
 
   let res = await bridge.swap(
     accountAddress,
