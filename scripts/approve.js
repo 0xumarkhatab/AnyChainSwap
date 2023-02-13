@@ -47,7 +47,7 @@ function getNetworkWeb3(chainName) {
       });
 
       const web3Eth = new Web3(localKeyProvider);
-      return webEth;
+      return web3Eth;
 
     case "bsc":
       var localKeyProvider = new HDWalletProvider({
@@ -56,7 +56,7 @@ function getNetworkWeb3(chainName) {
       });
 
       const web3Bsc = new Web3(localKeyProvider);
-      return webBsc;
+      return web3Bsc;
 
     case "polygon":
       var localKeyProvider = new HDWalletProvider({

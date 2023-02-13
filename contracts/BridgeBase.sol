@@ -80,7 +80,7 @@ contract SwapBridgeBase {
             !processedUserSignatures[user][signature],
             "Transaction has already been processed!"
         );
-        token.transferFrom(address(this), user, amount);
+        token.transfer(user, amount);
         processedUserSignatures[user][signature] = true;
 
         emit WithdrawSuccess(

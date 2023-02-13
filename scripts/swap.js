@@ -44,7 +44,6 @@ module.exports = async (done) => {
   console.log("Source is " + source + " Destination " + destination);
 
   const nonce = 2; //Need to increment this for each new transfer
-  const accounts = await web3.eth.getAccounts();
   let NetworkBridge = getNetworkBridge(source);
   if (!NetworkBridge) return 0;
 
@@ -59,7 +58,7 @@ module.exports = async (done) => {
     .toString("hex");
   const { signature } = web3.eth.accounts.sign(message, privKey);
   console.log({ signature });
-  console.log("starting swap ...");
+  console.log("starting swap for " + amount + "tokens...");
 
   let res = await bridge.swap(
     accountAddress,

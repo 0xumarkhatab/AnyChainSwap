@@ -7789,17 +7789,17 @@
         689
       ],
       "TokenBase": [
-        1182
+        1178
       ],
       "TokenOptimism": [
-        1224
+        1220
       ]
     },
-    "id": 1225,
+    "id": 1221,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1212,
+        "id": 1208,
         "literals": [
           "solidity",
           "^",
@@ -7812,11 +7812,11 @@
       {
         "absolutePath": "project:/contracts/TokenBase.sol",
         "file": "./TokenBase.sol",
-        "id": 1213,
+        "id": 1209,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 1225,
-        "sourceUnit": 1183,
+        "scope": 1221,
+        "sourceUnit": 1179,
         "src": "25:25:17",
         "symbolAliases": [],
         "unitAlias": ""
@@ -7826,13 +7826,13 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 1214,
+              "id": 1210,
               "name": "TokenBase",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 1182,
+              "referencedDeclaration": 1178,
               "src": "78:9:17"
             },
-            "id": 1215,
+            "id": 1211,
             "nodeType": "InheritanceSpecifier",
             "src": "78:9:17"
           }
@@ -7841,10 +7841,10 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 1224,
+        "id": 1220,
         "linearizedBaseContracts": [
-          1224,
-          1182,
+          1220,
+          1178,
           586,
           689,
           664,
@@ -7856,12 +7856,12 @@
         "nodes": [
           {
             "body": {
-              "id": 1222,
+              "id": 1218,
               "nodeType": "Block",
               "src": "150:2:17",
               "statements": []
             },
-            "id": 1223,
+            "id": 1219,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -7869,7 +7869,7 @@
                 "arguments": [
                   {
                     "hexValue": "4f7074696d69736d20546f6b656e",
-                    "id": 1218,
+                    "id": 1214,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -7885,7 +7885,7 @@
                   },
                   {
                     "hexValue": "4f7074696d69736d544b",
-                    "id": 1219,
+                    "id": 1215,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -7900,13 +7900,13 @@
                     "value": "OptimismTK"
                   }
                 ],
-                "id": 1220,
+                "id": 1216,
                 "kind": "baseConstructorSpecifier",
                 "modifierName": {
-                  "id": 1217,
+                  "id": 1213,
                   "name": "TokenBase",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 1182,
+                  "referencedDeclaration": 1178,
                   "src": "108:9:17"
                 },
                 "nodeType": "ModifierInvocation",
@@ -7917,25 +7917,25 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1216,
+              "id": 1212,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "105:2:17"
             },
             "returnParameters": {
-              "id": 1221,
+              "id": 1217,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "150:0:17"
             },
-            "scope": 1224,
+            "scope": 1220,
             "src": "94:58:17",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 1225,
+        "scope": 1221,
         "src": "52:102:17",
         "usedErrors": []
       }
@@ -8006,7 +8006,7 @@
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-02-13T02:59:16.025Z",
+  "updatedAt": "2023-02-13T04:23:38.259Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

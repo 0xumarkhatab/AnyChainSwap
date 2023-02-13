@@ -1,27 +1,32 @@
 const Web3 = require("web3");
-
 const BridgeEth = require("../build/contracts/BridgeEth");
 const BridgePolygon = require("../build/contracts/BridgePolygon");
 const BridgeOptimism = require("../build/contracts/BridgeOptimism");
 const BridgeArbitrum = require("../build/contracts/BridgeArbitrum");
 const BridgeAvalanche = require("../build/contracts/BridgeAvalanche");
 const BridgeBsc = require("../build/contracts/BridgeBsc");
-const {
-  ethProviderUrl,
-  polygonProviderUrl,
-  bscProviderUrl,
-  optimismProviderUrl,
-  arbitrumProviderUrl,
-  avalancheProviderUrl,
-  avalancheChainId,
-  arbitrumChainId,
-  optimismChainId,
-  polygonChainId,
-  bscChainId,
-  ethChainId,
-} = require("./providerUrls");
 const adminPrivKey =
   "5cba9caf051ee2e460bb9ce372cdb51fc6b8782d88dad729cb7baf63d99d95b2";
+const admin = "0xbe68eE8a43ce119a56625d7E645AbAF74652d5E1";
+// providers information
+const ethProviderUrl =
+  "wss://goerli.infura.io/ws/v3/0e88431708fb4d219a28755bf50fb061";
+const polygonProviderUrl =
+  "https://polygon-mumbai.infura.io/v3/0e88431708fb4d219a28755bf50fb061";
+const bscProviderUrl = "https://data-seed-prebsc-1-s3.binance.org:8545";
+const optimismProviderUrl =
+  "https://optimism-goerli.infura.io/v3/0e88431708fb4d219a28755bf50fb061";
+const arbitrumProviderUrl =
+  "https://arbitrum-goerli.infura.io/v3/0e88431708fb4d219a28755bf50fb061";
+const avalancheProviderUrl =
+  "https://avalanche-fuji.infura.io/v3/0e88431708fb4d219a28755bf50fb061";
+
+const ethChainId = "5";
+const bscChainId = "97";
+const polygonChainId = "80001";
+const avalancheChainId = "43113";
+const optimismChainId = "420";
+const arbitrumChainId = "421613";
 
 // Instantiating web3 objects with chains
 const web3Eth = new Web3(ethProviderUrl);
@@ -62,19 +67,33 @@ const bridgeAvalanche = new web3Avalanche.eth.Contract(
 // The private key of the wallet to be used as the admin address
 
 // Deriving the public address of the wallet using the private key
-const { address: admin } = web3Bsc.eth.accounts.wallet.add(adminPrivKey);
+web3Eth.eth.accounts.wallet.add(adminPrivKey);
+web3Bsc.eth.accounts.wallet.add(adminPrivKey);
+web3Polygon.eth.accounts.wallet.add(adminPrivKey);
+web3Optimism.eth.accounts.wallet.add(adminPrivKey);
+web3Avalanche.eth.accounts.wallet.add(adminPrivKey);
+web3Arbitrum.eth.accounts.wallet.add(adminPrivKey);
 
 async function executeTransaction(
   user,
   amount,
   nonce,
   signature,
+  sourceChain,
+  destinationChain,
   web3Object,
   bridgeObject
 ) {
   // initiate withdraw transaction
   // Destructuring the values from the event
-  const tx = bridgeObject.methods.withdraw(user, amount, nonce, signature);
+  const tx = bridgeObject.methods.withdraw(
+    user,
+    amount,
+    nonce,
+    signature,
+    sourceChain,
+    destinationChain
+  );
 
   // Getting the gas price and gas cost required for the method call
   const [gasPrice, gasCost] = await Promise.all([
@@ -116,6 +135,8 @@ async function performDestinationSwap(
         amount,
         nonce,
         signature,
+        sourceChain,
+        destinationChain,
         web3Eth,
         bridgeEth
       );
@@ -127,6 +148,8 @@ async function performDestinationSwap(
         amount,
         nonce,
         signature,
+        sourceChain,
+        destinationChain,
         web3Bsc,
         bridgeBsc
       );
@@ -139,6 +162,8 @@ async function performDestinationSwap(
         amount,
         nonce,
         signature,
+        sourceChain,
+        destinationChain,
         web3Polygon,
         bridgePolygon
       );
@@ -151,6 +176,8 @@ async function performDestinationSwap(
         amount,
         nonce,
         signature,
+        sourceChain,
+        destinationChain,
         web3Arbitrum,
         bridgeArbitrum
       );
@@ -163,6 +190,8 @@ async function performDestinationSwap(
         amount,
         nonce,
         signature,
+        sourceChain,
+        destinationChain,
         web3Optimism,
         bridgeOptimism
       );
@@ -175,6 +204,8 @@ async function performDestinationSwap(
         amount,
         nonce,
         signature,
+        sourceChain,
+        destinationChain,
         web3Avalanche,
         bridgeAvalanche
       );
@@ -213,7 +244,7 @@ bridgeBsc.events.DepositSuccess({ fromBlock: 0 }).on("data", async (event) => {
   const { user, amount, nonce, signature, sourceChain, destinationChain } =
     event.returnValues;
   console.log(`
-    ETH Deposit Success:
+    BSC Deposit Success:
     - ${user} Depoisted ${amount} tokens
     - Signature ${signature}
   `);
@@ -233,7 +264,7 @@ bridgePolygon.events
     const { user, amount, nonce, signature, sourceChain, destinationChain } =
       event.returnValues;
     console.log(`
-    ETH Deposit Success:
+    Polygon Deposit Success:
     - ${user} Depoisted ${amount} tokens
     - Signature ${signature}
   `);
@@ -253,7 +284,7 @@ bridgeArbitrum.events
     const { user, amount, nonce, signature, sourceChain, destinationChain } =
       event.returnValues;
     console.log(`
-    ETH Deposit Success:
+    Arbitrum Deposit Success:
     - ${user} Depoisted ${amount} tokens
     - Signature ${signature}
   `);
@@ -273,7 +304,7 @@ bridgeOptimism.events
     const { user, amount, nonce, signature, sourceChain, destinationChain } =
       event.returnValues;
     console.log(`
-    ETH Deposit Success:
+    Optimism Deposit Success:
     - ${user} Depoisted ${amount} tokens
     - Signature ${signature}
   `);
@@ -293,7 +324,7 @@ bridgeAvalanche.events
     const { user, amount, nonce, signature, sourceChain, destinationChain } =
       event.returnValues;
     console.log(`
-    ETH Deposit Success:
+    Avalanche Deposit Success:
     - ${user} Depoisted ${amount} tokens
     - Signature ${signature}
   `);

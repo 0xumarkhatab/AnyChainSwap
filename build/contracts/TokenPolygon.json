@@ -67,7 +67,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -91,7 +92,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -134,7 +136,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -147,7 +150,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -226,7 +230,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -239,7 +244,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -252,7 +258,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -7789,17 +7796,17 @@
         689
       ],
       "TokenBase": [
-        1182
+        1178
       ],
       "TokenPolygon": [
-        1238
+        1234
       ]
     },
-    "id": 1239,
+    "id": 1235,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1226,
+        "id": 1222,
         "literals": [
           "solidity",
           "^",
@@ -7812,11 +7819,11 @@
       {
         "absolutePath": "project:/contracts/TokenBase.sol",
         "file": "./TokenBase.sol",
-        "id": 1227,
+        "id": 1223,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 1239,
-        "sourceUnit": 1183,
+        "scope": 1235,
+        "sourceUnit": 1179,
         "src": "25:25:18",
         "symbolAliases": [],
         "unitAlias": ""
@@ -7826,13 +7833,13 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 1228,
+              "id": 1224,
               "name": "TokenBase",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 1182,
+              "referencedDeclaration": 1178,
               "src": "77:9:18"
             },
-            "id": 1229,
+            "id": 1225,
             "nodeType": "InheritanceSpecifier",
             "src": "77:9:18"
           }
@@ -7841,10 +7848,10 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 1238,
+        "id": 1234,
         "linearizedBaseContracts": [
-          1238,
-          1182,
+          1234,
+          1178,
           586,
           689,
           664,
@@ -7856,12 +7863,12 @@
         "nodes": [
           {
             "body": {
-              "id": 1236,
+              "id": 1232,
               "nodeType": "Block",
               "src": "147:2:18",
               "statements": []
             },
-            "id": 1237,
+            "id": 1233,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -7869,7 +7876,7 @@
                 "arguments": [
                   {
                     "hexValue": "506f6c79676f6e20546f6b656e",
-                    "id": 1232,
+                    "id": 1228,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -7885,7 +7892,7 @@
                   },
                   {
                     "hexValue": "504f4c59474f4e544b",
-                    "id": 1233,
+                    "id": 1229,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -7900,13 +7907,13 @@
                     "value": "POLYGONTK"
                   }
                 ],
-                "id": 1234,
+                "id": 1230,
                 "kind": "baseConstructorSpecifier",
                 "modifierName": {
-                  "id": 1231,
+                  "id": 1227,
                   "name": "TokenBase",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 1182,
+                  "referencedDeclaration": 1178,
                   "src": "107:9:18"
                 },
                 "nodeType": "ModifierInvocation",
@@ -7917,25 +7924,25 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1230,
+              "id": 1226,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "104:2:18"
             },
             "returnParameters": {
-              "id": 1235,
+              "id": 1231,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "147:0:18"
             },
-            "scope": 1238,
+            "scope": 1234,
             "src": "93:56:18",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 1239,
+        "scope": 1235,
         "src": "52:99:18",
         "usedErrors": []
       }
@@ -8001,12 +8008,12 @@
         }
       },
       "links": {},
-      "address": "0xA9Cb7ac1655Bcc296D4240121d817bB02537fd37",
-      "transactionHash": "0xc919666956e54cbe0d314f3560467e9a3f22c6d7266cf5012f60d814dd8a94c8"
+      "address": "0x95f81C0505907C67A019505bF64F0De3a6886Cae",
+      "transactionHash": "0x573c1ed79b104d5f9bd6d7aed515403ee8d6e0ded6fb13cb8ae687a057f0701f"
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-02-13T02:59:16.039Z",
+  "updatedAt": "2023-02-13T04:23:38.275Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
