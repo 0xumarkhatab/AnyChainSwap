@@ -3,15 +3,27 @@ pragma solidity ^0.8.7;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract SwapBridgeBase {
-    IERC20 token;
+    IERC20[] public tokens;
+
     mapping(address => mapping(bytes => bool)) processedUserSignatures;
 
-    constructor(address _token) {
-        token = IERC20(_token);
+    constructor(
+        address _token1,
+        address _token2,
+        address _token3,
+        address _token4,
+        address _token5
+    ) {
+        tokens.push(IERC20(_token1));
+        tokens.push(IERC20(_token2));
+        tokens.push(IERC20(_token3));
+        tokens.push(IERC20(_token4));
+        tokens.push(IERC20(_token5));
     }
 
     event DepositSuccess(
         address user,
+        uint tokenNumber,
         uint amount,
         uint nonce,
         bytes signature,
@@ -20,6 +32,7 @@ contract SwapBridgeBase {
     );
     event WithdrawSuccess(
         address user,
+        uint tokenNumber,
         uint amount,
         uint nonce,
         bytes signature,
@@ -29,6 +42,7 @@ contract SwapBridgeBase {
 
     function swap(
         address user,
+        uint tokenNumber,
         uint amount,
         uint nonce,
         bytes memory signature,
@@ -44,17 +58,24 @@ contract SwapBridgeBase {
         );
         // 0x7ec4d3fb081bd6db1102f7cfd085984fb7ab4e8e04de61f2b94dcd7858778d14159aed4255970932617ad4ffd1e75d301764162bca181b8cdec183db9f1a446e1c
         // 0x7ec4d3fb081bd6db1102f7cfd085984fb7ab4e8e04de61f2b94dcd7858778d14159aed4255970932617ad4ffd1e75d301764162bca181b8cdec183db9f1a446e1c
+        require(
+            tokenNumber < tokens.length && tokenNumber > 0,
+            "Invalid token Number"
+        );
+        IERC20 token = tokens[tokenNumber - 1];
 
         require(
             token.allowance(msg.sender, address(this)) >= amount,
             "Insufficient Allowance to contract"
         );
         // take tokens in from user
+
         token.transferFrom(user, address(this), amount);
         processedUserSignatures[user][signature] = false;
 
         emit DepositSuccess(
             user,
+            tokenNumber,
             amount,
             nonce,
             signature,
@@ -65,6 +86,7 @@ contract SwapBridgeBase {
 
     function withdraw(
         address user,
+        uint tokenNumber,
         uint amount,
         uint nonce,
         bytes memory signature,
@@ -83,11 +105,14 @@ contract SwapBridgeBase {
             !processedUserSignatures[user][signature],
             "Transaction has already been processed!"
         );
+        IERC20 token = tokens[tokenNumber - 1];
+
         token.transfer(user, amount);
         processedUserSignatures[user][signature] = true;
 
         emit WithdrawSuccess(
             user,
+            tokenNumber,
             amount,
             nonce,
             signature,
