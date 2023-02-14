@@ -77,7 +77,7 @@ module.exports = async function (deployer, network, addresses) {
   async function tokenDeployer(token) {
     await deployer.deploy(token);
     const token_ = await token.deployed();
-    return;
+    return token_;
   }
   async function NetworkContentDeployer(
     bridge,
@@ -87,6 +87,12 @@ module.exports = async function (deployer, network, addresses) {
     token4,
     token5
   ) {
+    let token1_ = await tokenDeployer(token1);
+    let token2_ = await tokenDeployer(token2);
+    let token3_ = await tokenDeployer(token3);
+    let token4_ = await tokenDeployer(token4);
+    let token5_ = await tokenDeployer(token5);
+
     await deployer.deploy(bridge, token_.address);
     const bridge_ = await bridge.deployed();
     console.log("Minting tokens for bridge contract");
