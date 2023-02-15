@@ -21,9 +21,9 @@ const Token5Polygon = artifacts.require("TokenPolygon5.sol");
 
 const BridgeEth = artifacts.require("./BridgeEth.sol");
 const BridgePolygon = artifacts.require("BridgePolygon.sol");
-const BridgeOptimism = artifacts.require("BridgeOptimism.sol");
-const BridgeArbitrum = artifacts.require("BridgeArbitrum.sol");
-const BridgeAvalanche = artifacts.require("BridgeAvalanche.sol");
+// const BridgeOptimism = artifacts.require("BridgeOptimism.sol");
+// const BridgeArbitrum = artifacts.require("BridgeArbitrum.sol");
+// const BridgeAvalanche = artifacts.require("BridgeAvalanche.sol");
 const BridgeBsc = artifacts.require("BridgeBsc.sol");
 
 module.exports = async function (deployer, network, addresses) {
@@ -93,11 +93,27 @@ module.exports = async function (deployer, network, addresses) {
     let token4_ = await tokenDeployer(token4);
     let token5_ = await tokenDeployer(token5);
 
-    await deployer.deploy(bridge, token_.address);
+    await deployer.deploy(
+      bridge,
+      token1_.address,
+      token2_.address,
+      token3_.address,
+      token4_.address,
+      token5_.address
+    );
     const bridge_ = await bridge.deployed();
     console.log("Minting tokens for bridge contract");
-    await token_.mint(bridge_.address, 1000);
+    await token1_.mint(bridge_.address, 1000);
+    await token2_.mint(bridge_.address, 1000);
+    await token3_.mint(bridge_.address, 1000);
+    await token4_.mint(bridge_.address, 1000);
+    await token5_.mint(bridge_.address, 1000);
+
     console.log("Minting tokens for User ", addresses[0]);
-    await token_.mint(addresses[0], 1000);
+    await token1_.mint(addresses[0], 1000);
+    await token2_.mint(addresses[0], 1000);
+    await token3_.mint(addresses[0], 1000);
+    await token4_.mint(addresses[0], 1000);
+    await token5_.mint(addresses[0], 1000);
   }
 };
