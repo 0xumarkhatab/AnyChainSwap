@@ -1,25 +1,25 @@
 // Tokens import
-const Token1Eth = artifacts.require("Token1Eth.sol");
-const Token2Eth = artifacts.require("Token2Eth.sol");
-const Token3Eth = artifacts.require("Token3Eth.sol");
-const Token4Eth = artifacts.require("Token4Eth.sol");
-const Token5Eth = artifacts.require("Token5Eth.sol");
+const Token1Eth = artifacts.require("./TokenEth1.sol");
+const Token2Eth = artifacts.require("./TokenEth2.sol");
+const Token3Eth = artifacts.require("./TokenEth3.sol");
+const Token4Eth = artifacts.require("./TokenEth4.sol");
+const Token5Eth = artifacts.require("./TokenEth5.sol");
 
-const Token1Bsc = artifacts.require("Token1Bsc.sol");
-const Token2Bsc = artifacts.require("Token2Bsc.sol");
-const Token3Bsc = artifacts.require("Token3Bsc.sol");
-const Token4Bsc = artifacts.require("Token4Bsc.sol");
-const Token5Bsc = artifacts.require("Token5Bsc.sol");
+const Token1Bsc = artifacts.require("TokenBsc1.sol");
+const Token2Bsc = artifacts.require("TokenBsc2.sol");
+const Token3Bsc = artifacts.require("TokenBsc3.sol");
+const Token4Bsc = artifacts.require("TokenBsc4.sol");
+const Token5Bsc = artifacts.require("TokenBsc5.sol");
 
-const Token1Polygon = artifacts.require("Token1Polygon.sol");
-const Token2Polygon = artifacts.require("Token2Polygon.sol");
-const Token3Polygon = artifacts.require("Token3Polygon.sol");
-const Token4Polygon = artifacts.require("Token4Polygon.sol");
-const Token5Polygon = artifacts.require("Token5Polygon.sol");
+const Token1Polygon = artifacts.require("TokenPolygon1.sol");
+const Token2Polygon = artifacts.require("TokenPolygon2.sol");
+const Token3Polygon = artifacts.require("TokenPolygon3.sol");
+const Token4Polygon = artifacts.require("TokenPolygon4.sol");
+const Token5Polygon = artifacts.require("TokenPolygon5.sol");
 
 // Bridges import
 
-const BridgeEth = artifacts.require("BridgeEth.sol");
+const BridgeEth = artifacts.require("./BridgeEth.sol");
 const BridgePolygon = artifacts.require("BridgePolygon.sol");
 const BridgeOptimism = artifacts.require("BridgeOptimism.sol");
 const BridgeArbitrum = artifacts.require("BridgeArbitrum.sol");
