@@ -4,6 +4,7 @@
     "@truffle/hdwallet-provider": "^2.1.5",
     "alchemy-sdk": "^2.4.3",
     "artifacts": "^0.0.1",
+    "dotenv": "^16.0.3",
     "ethers": "^6.0.2",
     "fs": "^0.0.1-security",
     "path": "^0.12.7"

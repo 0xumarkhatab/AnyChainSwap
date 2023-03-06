@@ -103,17 +103,27 @@ module.exports = async function (deployer, network, addresses) {
     );
     const bridge_ = await bridge.deployed();
     console.log("Minting tokens for bridge contract");
+    console.log("token1");
     await token1_.mint(bridge_.address, 1000);
+    console.log("token2");
     await token2_.mint(bridge_.address, 1000);
+    console.log("token3");
     await token3_.mint(bridge_.address, 1000);
+    console.log("token4");
     await token4_.mint(bridge_.address, 1000);
+    console.log("token5");
     await token5_.mint(bridge_.address, 1000);
 
     console.log("Minting tokens for User ", addresses[0]);
+    console.log("token1");
     await token1_.mint(addresses[0], 1000);
+    console.log("token2");
     await token2_.mint(addresses[0], 1000);
+    console.log("token3");
     await token3_.mint(addresses[0], 1000);
+    console.log("token4");
     await token4_.mint(addresses[0], 1000);
+    console.log("token5");
     await token5_.mint(addresses[0], 1000);
   }
 };

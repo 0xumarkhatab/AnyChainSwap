@@ -226,12 +226,19 @@ async function performDestinationSwap(
   }
 }
 
+//
+console.log({
+  ethEvents: bridgeEth.events,
+  bscEvents: bridgeBsc.events,
+  polygonEvents: bridgePolygon.events,
+});
+const fromBlock = 0; // Set the starting block to retrieve events from
+
 // Listening to Transfer events emitted by the BridgeEth contract
 console.log("Listening to the events....");
 
-//
-
-bridgeEth.events.DepositSuccess({ fromBlock: 0 }).on("data", async (event) => {
+// Retrieve past DepositSuccess events and attach listener for new events
+bridgeEth.events.DepositSuccess({ fromBlock }).on("data", async (event) => {
   const {
     user,
     tokenNumber,
